@@ -82,113 +82,99 @@
     </div>
 </div>
 --><div class="card">  
-  <div class="card-header" id="booklet">
-    Challenge - CG:SHOP
-  </div>
-  <div class="card-body">
-    See <a href="https://cgshop.ibr.cs.tu-bs.de/competition/cg-shop-2025/">https://cgshop.ibr.cs.tu-bs.de/competition/cg-shop-2025/</a>
-  </div>
-</div>
-
-<!--
-<div class="card">  
   <div class="card-header">
     Challenge           
   </div>
-  <div class="card-body">        
+  <div class="card-body">
     <p>
-      We are happy to announce the Sixth Computational Geometry Challenge, as part of CG Week in Athens, Greece, June 11-14, 2024.
+      We are happy to announce the Seventh Computational Geometry Challenge, as part of CG Week in Kanazawa, Japan, June 23-27, 2025.
     </p>
     <p>
-      As in previous years, the objective will be to compute good solutions to instances of a difficult geometric 
-      optimization problem. The specific problem chosen for the 2024 Challenge is <b>Maximum Polygon Packing</b>, as follows.
+      As in previous years, the objective will be to compute good solutions to instances of a difficult geometric optimization problem.
+      The specific problem chosen for the 2025 Challenge is <b>Minimum Non-Obtuse Triangulations</b>, as follows.
     </p>              
   </div>
 </div>
 
 <div class="card">  
   <div class="card-header">
-    Maximum Polygon Packing           
+    Minimum Non-Obtuse Triangulations
   </div>
   <div class="card-body">   
     <ul class="list-group list-group-flush">
       <li class="list-group-item">     
         <h5>Description</h5>
-        <p>
-          Given a convex region, $P$, in the plane, and a collection of simple polygons, $Q_i,\dots,Q_n$, each $Q_i$ with a respective value of 
-          $c_i$, the task is to find a subset $S$ of $1,\dots,n$ and a feasible packing within $P$ of the polygons $Q_i$ (without rotation) for $i\in S$.
+	<p>
+	  In the Planar Straight Line Graphs (PSLGs) variant of the Minimum Non-Obtuse
+	  Triangulation problem, the objective is to triangulate the convex hull of a given PSLG
+	  \(G\), which is defined by a set of vertices and edges laid out in a plane such that the
+	  edges do not cross except at their endpoints. The triangulation must incorporate the
+	  existing edges of \(G\) and can include the addition of Steiner points anywhere in the
+	  plane, including on these edges. The placement of Steiner points is particularly
+	  challenging because it can affect the geometric properties of adjacent faces, thus
+	  complicating the triangulation process. All triangles formed in the solution must be
+	  non-obtuse, with each angle not exceeding 90 degrees, and the solution seeks to minimize
+	  the total number of Steiner points. This problem is complex due to its geometric
+	  constraints and the interdependencies introduced by Steiner points, making it a
+	  computationally demanding task likely belonging to the NP-hard class of problems.
         </p>
+        <p>
+	  For a polygon, an example of a Minimum Non-Obtuse Triangulation can be found as Figure 1 in
+	  [<a href="https://link.springer.com/article/10.1007/BF02570715">3</a>], see below.
+	</p>
 
         <h5>Objective</h5>
         <p>
-          Maximize the total value $\sum_{i\in S}c_i$ of the packed polygons.
+	  Find a feasible non-obtuse triangulation using a minimum number of Steiner points.
         </p>
         <h5>Motivation</h5>
         <p>
-          Optimal packing problems have an extensive history in Computational Geometry. They are also relevant in many practical contexts.
+	  Historically, triangulations have been crucial for applications ranging from
+	  computer graphics and mesh generation to geographic information systems (GIS)
+	  and finite element analysis. In computer graphics, triangulating surfaces
+	  enables the rendering of three-dimensional objects with high precision and
+	  efficiency. In mesh generation, triangulations help in discretizing a continuous
+	  geometric space into simpler elements that can be easily processed for
+	  simulations and analyses, particularly in engineering and physics.
         </p>
         <p>
-          Even the one-dimensional version of the problem (the Knapsack Problem) is NP-hard; furthermore, some geometric variants have been shown to be ∃R-complete [1], 
-          which most likely implies that they are not in the class NP.
+	  The importance of non-obtuse triangulations in computational geometry is
+	  particularly evident in solving partial differential equations using the finite
+	  element method. In this method, the domain is divided into triangles, with
+	  non-obtuse triangulations ensuring that the resulting matrices are
+	  Stieltjes—symmetric positive definite with non-positive off-diagonal
+	  entries. This specific matrix structure enhances the performance of iterative
+	  methods, such as block Gauss-Seidel, improving their convergence rates. The
+	  geometric constraint of avoiding obtuse angles in triangulations not only
+	  stabilizes numerical calculations but also optimizes the efficiency of
+	  computational processes, making non-obtuse triangulations a crucial
+	  consideration in scientific computing and numerical analysis.
         </p>
         <p>
-          The contributors with the most outstanding solutions will be recognized at CG Week 2024 and invited to present their results, both at the event 
-          and in the proceedings.
-        </p>
-        <p>
-          We are looking forward to your contributions and welcome questions and comments!
+	  Minimum Non-Obtuse Triangulations have been studied for quite a while, with references in
+	  DCG and SoCG going back to the 1980s [<a href="https://link.springer.com/article/10.1007/BF02187904">1</a>], and connections to finite element analysis.
+	  Subsequent work considered bounds on the necessary numbers of Steiner points
+	  [<a href="https://doi.org/10.1145/109648.109686">2</a>,<a href="https://link.springer.com/article/10.1007/BF02570715">3</a>].
+	  More recent work [<a href="https://link.springer.com/article/10.1007/s00454-016-9772-8">4</a>]
+	  considers an algorithm for Planar Straight Line Graphs (PSLGs) [<a href="https://doi.org/10.1145/109648.109686">2</a>].
+	  The computational complexity for simple polygons and polygons with holes remains an
+	  open question in the field.
         </p>
       </li>
       <li class="list-group-item">
         <h5>Instances</h5>
         <p>
-          A large number and variety of input polygonal regions P are provided for the competition. 
-          Make sure to download the actual challenge instances and not the example instances, as only those are evaluated.
+	  A diverse collection of approximately 150 to 400 Planar Straight Line Graphs will be provided for the competition.
         </p>                
-      </li>
-      <li class="list-group-item">
-        <h5>Website</h5>
-        <p>
-          Details of the competition (such as benchmark instances, data formats, and rules for submission and evaluation) can be found on the website:
-        </p>
-        <a href="https://cgshop.ibr.cs.tu-bs.de/competition/cg-shop-2024/#problem-description">https://cgshop.ibr.cs.tu-bs.de/competition/cg-shop-2024/#problem-description</a>
       </li>
       <li class="list-group-item">
         <h5>Credit</h5>
         <p>
-          The underlying problem was suggested by Mikkel Abrahamsen, Copenhagen.
+	  The underlying problem was suggested by Mikkel Abrahamsen, Copenhagen.
         </p>               
       </li>
-      <li class="list-group-item">
-        <h5>References</h5>
-        <p>
-          [1] M. Abrahamsen, T. Miltzow and N. Seiferth, "Framework for ER-Completeness of Two-Dimensional Packing Problems", 
-          2020 IEEE 61st Annual Symposium on Foundations of Computer Science (FOCS), 2020, pp. 1014-1021, doi: 10.1109/FOCS46700.2020.00098.
-        </p>               
-      </li>   
     </ul>         
   </div>
-</div>
-
-<div class="card">  
-  <div class="card-header">
-    Important Dates
-  </div>
-  <div class="card-body">   
-    A first batch of test instances has been released in late July 2023; the actual benchmark instances for the Challenge have ben 
-    released in late September. The contest will close in early 2024.
-    <ul>
-      <li>
-        <div class="date">July 31, 2023:</div> First test instances.
-      </li>
-      <li>
-        <div class="date">September 29, 2023:</div> Contest instances.
-      </li>
-      <li>
-        <div class="date">January 22, 2024 (AOE):</div> Contest Closes.
-      </li>
-    </ul>
-  </div>    
 </div>
 
 <div class="card">  
@@ -204,6 +190,7 @@
     </ul>
   </div>    
 </div>
+
 <div class="card">  
   <div class="card-header">
     Advisory Board
@@ -221,7 +208,77 @@
   </div>    
 </div>
 
--->
+<div class="card">  
+  <div class="card-header">
+    Timeline
+  </div>
+  <div class="card-body">
+    A first batch of test instances will be released at the end of July 2024;
+    the actual benchmark instances for the Challenge will be released in late September.
+    The contest will close in early 2025.
+    <ul>
+      <li>
+        <div class="date">July 31, 2024:</div> First test instances.
+      </li>
+      <li>
+        <div class="date">September 30, 2024:</div> Contest instances.
+      </li>
+      <li>
+        <div class="date">January 22, 2025 (AOE):</div> Contest Closes.
+      </li>
+    </ul>
+  </div>    
+</div>
+
+
+<div class="card">  
+  <div class="card-header">
+    Website
+  </div>
+  <div class="card-body">   
+    <p>
+      <a href="https://cgshop.ibr.cs.tu-bs.de/competition/cg-shop-2025/#problem-description">
+	https://cgshop.ibr.cs.tu-bs.de/competition/cg-shop-2025/#problem-description
+      </a>
+      <br />
+      At this site, you can also find a first set of test instances, along with some visualizations.
+    </p>
+  </div>    
+</div>
+
+<div class="card">  
+  <div class="card-header">
+    References
+  </div>
+  <div class="card-body">   
+    <p>
+      [1] Brenda S. Baker, Eric Grosse, Conor S. Rafferty:
+      Nonobtuse Triangulation of Polygons. Discret. Comput. Geom. 3: 147-168 (1988) <br />
+      <a href="https://link.springer.com/article/10.1007/BF02187904">https://link.springer.com/article/10.1007/BF02187904</a>
+    </p>
+    <p>
+      [2] Marshall W. Bern, David Eppstein:
+      Polynomial-Size Nonobtuse Triangulation of Polygons. SoCG 1991: 342-350
+      <a href="https://doi.org/10.1145/109648.109686">https://doi.org/10.1145/109648.109686</a>
+    </p>
+    <p>
+      [3] Marshall W. Bern, Scott A. Mitchell, Jim Ruppert:
+      Linear-Size Nonobtuse Triangulation of Polygons. Discret. Comput. Geom. 14(4): 411-428 (1995). <br />
+      <a href="https://link.springer.com/article/10.1007/BF02570715">https://link.springer.com/article/10.1007/BF02570715</a>
+    </p>
+    <p>
+      SoCG version:
+      Marshall W. Bern, Scott A. Mitchell, Jim Ruppert:
+      Linear-Size Nonobtuse Triangulation of Polygons. SCG 1994: 221-230 <br />
+      <a href="https://dl.acm.org/doi/abs/10.1145/177424.177974">https://dl.acm.org/doi/abs/10.1145/177424.177974</a>
+    </p>
+    <p>
+      [4] Christopher J. Bishop:
+      Nonobtuse Triangulations of PSLGs. Discret. Comput. Geom. 56(1): 43-92 (2016) <br />
+      <a href="https://link.springer.com/article/10.1007/s00454-016-9772-8">https://link.springer.com/article/10.1007/s00454-016-9772-8</a>
+    </p>
+  </div>    
+</div>
  
 <hr class="mx-auto">
 
