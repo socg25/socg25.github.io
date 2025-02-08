@@ -301,3 +301,13 @@ body {
   color: #000;
   border-color: #cbccce
 }
+
+.longlist li {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.longlist > li:nth-child(even) {}
+.longlist > li:nth-child(odd) {
+  background: #eee;
+}
