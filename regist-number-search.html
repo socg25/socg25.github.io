@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registration Number Search</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 1rem;
+      margin: 5px 0;
+      width: 90%;
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+
+    datalist option {
+      font-size: 1rem;
+    }
+
+    #result {
+      margin-top: 40px;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    #number {
+      display: block;
+      margin-top: 20px;
+      font-size: 4rem;
+      color: red;
+      font-weight: bold;
+    }
+
+    #result.error {
+      color: red;
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      #number {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Registration Number Search</h2>
+  <label for="nameInput">Please input your name:</label><br>
+  <input list="nameList" id="nameInput" placeholder="Ex: John Smith" />
+  <datalist id="nameList"></datalist><br>
+  <button onclick="showNumber()">Submit</button>
+
+  <p id="result"></p>
+
+  <script>
+    const userData = [
+{ name: "Derek Hein", number: "A003" },
+{ name: "Jie Gao", number: "A004" },
+{ name: "Marcus Wilhelm", number: "A005" },
+{ name: "Bettina Speckmann", number: "A006" },
+{ name: "Alexander He", number: "A007" },
+{ name: "Finn Thompson", number: "A008" },
+{ name: "David Mount", number: "A009" },
+{ name: "Anouk Sommer", number: "A010" },
+{ name: "Tim Ophelders", number: "A011" },
+{ name: "Marc van Kreveld", number: "A012" },
+{ name: "Sarita de Berg", number: "A013" },
+{ name: "Casper Rysgaard", number: "A014" },
+{ name: "Siu-Wing Cheng", number: "A015" },
+{ name: "Bei Wang Phillips", number: "A016" },
+{ name: "Jens Kristian Refsgaard Schou", number: "A017" },
+{ name: "Ivor van der Hoog", number: "A018" },
+{ name: "Frank Staals", number: "A019" },
+{ name: "Khallil Berrekkal", number: "A020" },
+{ name: "Antonia Kalb", number: "A021" },
+{ name: "Zihang Wu", number: "A022" },
+{ name: "Torben Scheele", number: "A023" },
+{ name: "Marena Richter", number: "A024" },
+{ name: "Jack Stade", number: "A025" },
+{ name: "Rebeka Raffay", number: "A026" },
+{ name: "Jules Wulms", number: "A027" },
+{ name: "Michael Hoffmann", number: "A028" },
+{ name: "Alexander Wolff", number: "A029" },
+{ name: "Bianca B. Dornelas", number: "A030" },
+{ name: "Jack S-J", number: "A031" },
+{ name: "Dominique Attali", number: "A032" },
+{ name: "Thomas Schibler", number: "A033" },
+{ name: "Sándor Fekete", number: "A034" },
+{ name: "Michael Perk", number: "A035" },
+{ name: "Phillip Keldenich", number: "A036" },
+{ name: "Lies Beers", number: "A037" },
+{ name: "Takeshi Tokuyama", number: "A038" },
+{ name: "Kristóf Huszár", number: "A039" },
+{ name: "Kyungjin Cho", number: "A040" },
+{ name: "Sanghwa Han", number: "A041" },
+{ name: "Chanho Song", number: "A042" },
+{ name: "Seonghyeon Hong", number: "A043" },
+{ name: "Seongbin Park", number: "A044" },
+{ name: "Hyeonjun Shin", number: "A045" },
+{ name: "Niloufar FULADI", number: "A046" },
+{ name: "Yuto Okada", number: "A047" },
+{ name: "Debajyoti Mondal", number: "A048" },
+{ name: "Haitao Wang", number: "A049" },
+{ name: "Martin Balko", number: "A050" },
+{ name: "Hyeyun Yang", number: "A051" },
+{ name: "Jiaheng Wang", number: "A052" },
+{ name: "Rhuaidi Antonio Burke", number: "A053" },
+{ name: "André van Renssen", number: "A054" },
+{ name: "Eunku Park", number: "A055" },
+{ name: "Simon D. Fink", number: "A056" },
+{ name: "Tetsuo ASANO", number: "A057" },
+{ name: "Francis Lazarus", number: "A058" },
+{ name: "Peyman Afshani", number: "A059" },
+{ name: "Yanheng Wang", number: "A060" },
+{ name: "Herbert Edelsbrunner", number: "A061" },
+{ name: "Hsien-Chih Chang", number: "A062" },
+{ name: "Attila Jung", number: "A063" },
+{ name: "Supanut Chaidee", number: "A064" },
+{ name: "Lotte Blank", number: "A065" },
+{ name: "Ángel Javier Alonso", number: "A066" },
+{ name: "Yakov Nekrich", number: "A067" },
+{ name: "Hung Hoang", number: "A068" },
+{ name: "John Hershberger", number: "A069" },
+{ name: "Sang Won Bae", number: "A070" },
+{ name: "Zhengyang Bai", number: "A071" },
+{ name: "Woojin Kim", number: "A072" },
+{ name: "Eliot Robson", number: "A073" },
+{ name: "Wonjun Lee", number: "A074" },
+{ name: "Graham Freifeld", number: "A075" },
+{ name: "Eric Samperton", number: "A076" },
+{ name: "Morteza Saghafian", number: "A077" },
+{ name: "Rafael Mendes de Oliveira", number: "A078" },
+{ name: "Yue Ren", number: "A079" },
+{ name: "Andrew Suk", number: "A080" },
+{ name: "Alexey Garber", number: "A081" },
+{ name: "Taehoon Ahn", number: "A082" },
+{ name: "Debajyoti Kar", number: "A083" },
+{ name: "Patrick Schnider", number: "A084" },
+{ name: "Matias Korman", number: "A085" },
+{ name: "Meike Hatzel", number: "A086" },
+{ name: "Oswin Aichholzer", number: "A087" },
+{ name: "Dmitriy Morozov", number: "A088" },
+{ name: "Katsuhisa Yamanaka", number: "A089" },
+{ name: "Evanthia Papadopoulou", number: "A090" },
+{ name: "Chih-Hung Liu", number: "A091" },
+{ name: "Konrad Anand", number: "A092" },
+{ name: "Jeff Phillips", number: "A093" },
+{ name: "Siddhartha Sarkar", number: "A094" },
+{ name: "Toppur Natarajan Badri", number: "A095" },
+{ name: "Arindam Khan", number: "A096" },
+{ name: "Tonan Kamata", number: "A097" },
+{ name: "Matthijs Ebbens", number: "A098" },
+{ name: "Yota Otachi", number: "A099" },
+{ name: "Florestan Brunck", number: "A100" },
+{ name: "Bala Krishnamoorthy", number: "A101" },
+{ name: "Ryuhei Uehara", number: "A102" },
+{ name: "Nicolau Oliver", number: "A103" },
+{ name: "Martin Nöllenburg", number: "A104" },
+{ name: "Todor Antić", number: "A105" },
+{ name: "Matthias Artmann", number: "A106" },
+{ name: "Magnus Christian Ring Merrild", number: "A107" },
+{ name: "Marzieh Eidi", number: "A108" },
+{ name: "Hiroshi IMAI", number: "A109" },
+{ name: "Laura Casabella", number: "A110" },
+{ name: "Ge Xia", number: "A111" },
+{ name: "Rolf Svenning", number: "A112" },
+{ name: "Maarten Löffler", number: "A113" },
+{ name: "Günter Rote", number: "A114" },
+{ name: "Geunho Kim", number: "A115" },
+{ name: "Brennon Treadwell", number: "A116" },
+{ name: "Keiko Imai", number: "A117" },
+{ name: "Yushi Uno", number: "A118" },
+{ name: "Guillaume Moroz", number: "A119" },
+{ name: "Dubois", number: "A120" },
+{ name: "Clément Maria", number: "A121" },
+{ name: "Hirotaka Ono", number: "A122" },
+{ name: "Ramanujan Sridharan", number: "A123" },
+{ name: "Hiro Ito", number: "A124" },
+{ name: "Elizaveta Streltsova", number: "A125" },
+{ name: "Lunel Corentin", number: "A126" },
+{ name: "Tenindra Abeywickrama", number: "A127" },
+{ name: "Birgit Vogtenhuber", number: "A128" },
+{ name: "Daniel Rutschmann", number: "A129" },
+{ name: "Jonathan Spreer", number: "A130" },
+{ name: "Asahi Takaoka", number: "A131" },
+{ name: "Yoshio Okamoto", number: "A132" },
+{ name: "Primoz Skraba", number: "A133" },
+{ name: "Stephan Tillmann", number: "A134" },
+{ name: "Charles Jordan", number: "A135" },
+{ name: "Dante Luber", number: "A136" },
+{ name: "Yuval Rabani", number: "A137" },
+{ name: "Sampson Wong", number: "A138" },
+{ name: "Ioannis Psarros", number: "A139" },
+{ name: "Luca Castelli Aleardi", number: "A140" },
+{ name: "Sang Duk Yoon", number: "A141" },
+{ name: "Timothy Chan", number: "A142" },
+{ name: "Erin Chambers", number: "A143" },
+{ name: "Kristin Knorr", number: "A144" },
+{ name: "Kengo Enami", number: "A145" },
+{ name: "Lindsey Deryckere", number: "A146" },
+{ name: "Shakhar Smorodinsky", number: "A147" },
+{ name: "Jakub Leśkiewicz", number: "A148" },
+{ name: "Yuan Sha", number: "A149" },
+{ name: "Nicolás Honorato-Droguett", number: "A150" },
+{ name: "Martin G. Herold", number: "A151" },
+{ name: "Wolfgang Mulzer", number: "A152" },
+{ name: "Shinichi Tanigawa", number: "A153" },
+{ name: "Christian Howard", number: "A154" },
+{ name: "Kien C. Huynh", number: "A155" },
+{ name: "Kenta Ozeki", number: "A156" },
+{ name: "Jeewon Kim", number: "A157" },
+{ name: "Jineon Baek", number: "A158" },
+{ name: "Csenge Lili Ködmön", number: "A159" },
+{ name: "Nir Petruschka", number: "A160" },
+{ name: "Toshiki Saitoh", number: "A161" },
+{ name: "Sean Dewar", number: "A162" },
+{ name: "Boris Aronov", number: "A163" },
+{ name: "Chaya Keller", number: "A164" },
+{ name: "On-Hei Solomon Lo", number: "A165" },
+{ name: "Henry Adams", number: "A166" },
+{ name: "David Eppstein", number: "A167" },
+{ name: "Yuta Inoue", number: "A168" },
+{ name: "Jiaqi Zheng", number: "A169" },
+{ name: "Mónika Csikós", number: "A170" },
+{ name: "Kenta Noguchi", number: "A171" },
+{ name: "Jacobus Conradi", number: "A172" },
+{ name: "Koki Furukawa", number: "A173" },
+{ name: "Andreas Kalavas", number: "A174" },
+{ name: "Atsuyuki Miyashita", number: "A175" },
+{ name: "Katharina Klost", number: "A176" },
+{ name: "Oliver Chubet", number: "A177" },
+{ name: "Atsunori Masuda", number: "A178" },
+{ name: "NIKOLAOS CHATZIS", number: "A179" },
+{ name: "Guanlin Mo", number: "A180" },
+{ name: "Sarah WAJSBROT", number: "A181" },
+{ name: "Sándor Kisfaludi-Bak", number: "A182" },
+{ name: "Christopher Fillmore", number: "A183" },
+{ name: "Martijn Struijs", number: "A184" },
+{ name: "Yusuke Suzuki", number: "A185" },
+{ name: "Sharath Raghvendra", number: "A186" },
+{ name: "Anastasiia Tsvietkova", number: "A187" },
+{ name: "Cameron Strachan", number: "A188" },
+{ name: "Daiki Kanaoka", number: "A189" },
+{ name: "Shohei Koizumi", number: "A190" },
+{ name: "Geert van Wordragen", number: "A191" },
+{ name: "Manuel Radons", number: "A192" },
+{ name: "Benedikt Kolbe", number: "A193" },
+{ name: "Andrew Clements", number: "A194" },
+{ name: "Frederick Stock", number: "A195" },
+{ name: "Xiaoming Liu", number: "A196" },
+{ name: "Meng He", number: "A197" },
+{ name: "Jean-Pierre von der Heydt", number: "A198" },
+{ name: "Germain Poullot", number: "A199" },
+{ name: "Jiumu Zhu", number: "A200" },
+{ name: "Shankha Shubhra Mukherjee", number: "A201" },
+{ name: "Benjamin Burton", number: "A202" },
+{ name: "Hiroki Minami", number: "A203" },
+{ name: "Saeed Odak", number: "A204" },
+{ name: "Kanata Warisaya", number: "A205" },
+{ name: "Weiming Feng", number: "A206" },
+{ name: "Tomoko Taniguchi", number: "A207" },
+{ name: "Giovanni Viglietta", number: "A208" },
+{ name: "Amane Koizumi", number: "A209" },
+{ name: "Kotona Motoyama", number: "A210" },
+{ name: "Hiroki Chikuma", number: "A211" },
+{ name: "Haote Zhou", number: "A212" },
+{ name: "Taiko Oshida", number: "A213" },
+{ name: "Fukue Kotegawa", number: "A214" },
+{ name: "Qian Mengze", number: "A215" },
+{ name: "Taichi Nakamura", number: "A216" },
+{ name: "Simon Moore", number: "A217" },
+{ name: "Shinichi Sugiura", number: "A218" },
+{ name: "Masaru Sato", number: "A219" },
+{ name: "Ponpailin Homsombut", number: "A220" },
+{ name: "Tomohiro Tachi", number: "A221" },
+{ name: "Meirav Zehavi", number: "A222" },
+{ name: "Hidetoshi Masai", number: "A223" },
+{ name: "Satoshi Murai", number: "A224" },
+{ name: "Asao Tokolo", number: "A225" },
+{ name: "Akiyoshi Tsuchiya", number: "A226" },
+{ name: "Jeongwon Moon", number: "A227" },
+{ name: "Jaegun Lee", number: "A228" },
+{ name: "Jueun Seo", number: "A229" },
+{ name: "Hwi Kim", number: "A230" },
+{ name: "Seokyun Kang", number: "A231" },
+{ name: "Jaehoon Chung", number: "A232" },
+{ name: "Byeonguk Kang", number: "A233" },
+{ name: "Seongmin Kwon", number: "A234" },
+{ name: "Mattie Ji", number: "A235" }
+    ];
+
+    const datalist = document.getElementById("nameList");
+    userData.forEach(user => {
+      const option = document.createElement("option");
+      option.value = user.name;
+      datalist.appendChild(option);
+    });
+
+    function showNumber() {
+      const inputName = document.getElementById("nameInput").value.trim();
+      const result = document.getElementById("result");
+      const user = userData.find(u => u.name === inputName);
+
+      if (user) {
+        result.className = "";
+        result.innerHTML = `Please show this screen to the staff:<span id="number">${user.number}</span>`;
+      } else {
+        result.className = "error";
+        result.textContent = "No data found";
+      }
+    }
+  </script>
+</body>
+</html>
